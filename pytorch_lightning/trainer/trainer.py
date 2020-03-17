@@ -12,7 +12,7 @@ import torch.distributed as torch_distrib
 import torch.multiprocessing as mp
 from torch.optim.optimizer import Optimizer
 from torch.utils.data import DataLoader
-from tqdm.auto import tqdm
+from tqdm import tqdm
 
 from pytorch_lightning.callbacks import Callback
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
