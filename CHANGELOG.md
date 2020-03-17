@@ -24,11 +24,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
--
+- Removed duplicated module `pytorch_lightning.utilities.arg_parse` for loading CLI arguments ([#1167](https://github.com/PyTorchLightning/pytorch-lightning/issues/1167))
 
 ### Fixed
 
-- Fixed bug related to type cheking of `ReduceLROnPlateau` lr schedulers([#1114](https://github.com/PyTorchLightning/pytorch-lightning/issues/1114))
+- Fixed bug related to type cheking of `ReduceLROnPlateau` lr schedulers ([#1114](https://github.com/PyTorchLightning/pytorch-lightning/issues/1114))
 
 ## [0.7.1] - 2020-03-07
 
