@@ -129,7 +129,7 @@ from typing import Callable
 
 import torch
 from torch.utils.data import DataLoader
-from tqdm.auto import tqdm
+from tqdm import tqdm
 import warnings
 
 from pytorch_lightning.core.lightning import LightningModule
