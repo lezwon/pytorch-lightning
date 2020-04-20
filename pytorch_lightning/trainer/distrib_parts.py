@@ -385,6 +385,7 @@ class TrainerDPMixin(ABC):
     tpu_global_core_rank: int
     use_tpu: bool
     data_parallel_device_ids: ...
+    tpu_id: int
 
     @property
     @abstractmethod
@@ -479,7 +480,11 @@ class TrainerDPMixin(ABC):
 
     def tpu_train(self, tpu_core_idx, model):
         # put model on tpu
-        model.to(xm.xla_device(self.tpu_id))
+        print(self.tpu_id)
+        device = xm.xla_device(self.tpu_id)
+        print(device)
+        model.to(device)
+        
 
         # get the appropriate tpu ranks
         self.tpu_local_core_rank = xm.get_local_ordinal()

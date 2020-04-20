@@ -173,6 +173,7 @@ class TrainerEvaluationLoopMixin(ABC):
     use_tpu: bool
     reload_dataloaders_every_epoch: ...
     progress_bar_refresh_rate: ...
+    tpu_id: int
 
     # Callback system
     on_validation_start: Callable
@@ -244,7 +245,9 @@ class TrainerEvaluationLoopMixin(ABC):
 
             # on TPU we have to wrap it under the ParallelLoader
             if self.use_tpu:
+                print(self.tpu_id)
                 device = xm.xla_device(self.tpu_id)
+                print(device)
                 dataloader = xla_pl.ParallelLoader(dataloader, [device])
                 dataloader = dataloader.per_device_loader(device)
 

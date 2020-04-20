@@ -226,6 +226,7 @@ class TrainerTrainLoopMixin(ABC):
     total_batch_idx: int
     checkpoint_callback: ...
     terminate_on_nan: bool
+    tpu_id: int
 
     # Callback system
     callbacks: List[Callback]
@@ -420,7 +421,9 @@ class TrainerTrainLoopMixin(ABC):
 
         # on TPU we have to wrap it under the ParallelLoader
         if self.use_tpu:
+            print(self.tpu_id)
             device = xm.xla_device(self.tpu_id)
+            print(device)
             train_dataloader = xla_pl.ParallelLoader(train_dataloader, [device])
             train_dataloader = train_dataloader.per_device_loader(device)
 
