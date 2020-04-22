@@ -755,7 +755,7 @@ class Trainer(
 
             #  COLAB_GPU is an env var available by default in Colab environments.
             #  KAGGLE_URL_BASE is an env var available by default in Kaggle environments.
-            should_fork = os.getenv('COLAB_GPU') or os.getenv('KAGGLE_URL_BASE')
+            should_fork = True
             start_method = 'fork' if should_fork else 'spawn'
 
             # track for predict
