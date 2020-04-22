@@ -754,7 +754,9 @@ class Trainer(
             log.info(f'training on {self.num_tpu_cores} TPU cores')
 
             #  COLAB_GPU is an env var available by default in Colab environments.
-            start_method = 'fork' if os.getenv('COLAB_GPU') else 'spawn'
+            #  KAGGLE_URL_BASE is an env var available by default in Kaggle environments.
+            should_fork = os.getenv('COLAB_GPU') or os.getenv('KAGGLE_URL_BASE')
+            start_method = 'fork' if should_fork else 'spawn'
 
             # track for predict
             self.model = model
