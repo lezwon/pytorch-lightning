@@ -248,7 +248,7 @@ class TrainerEvaluationLoopMixin(ABC):
                 print(self.tpu_id)
                 device = xm.xla_device(self.tpu_id)
                 print(device)
-                dataloader = xla_pl.ParallelLoader(dataloader, [device])
+                # dataloader = xla_pl.ParallelLoader(dataloader, [device])
                 dataloader = dataloader.per_device_loader(device)
 
             for batch_idx, batch in enumerate(dataloader):

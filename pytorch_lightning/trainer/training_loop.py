@@ -424,7 +424,7 @@ class TrainerTrainLoopMixin(ABC):
             print(self.tpu_id)
             device = xm.xla_device(self.tpu_id)
             print(device)
-            train_dataloader = xla_pl.ParallelLoader(train_dataloader, [device])
+            # train_dataloader = xla_pl.ParallelLoader(train_dataloader, [device])
             train_dataloader = train_dataloader.per_device_loader(device)
 
         # bookkeeping
