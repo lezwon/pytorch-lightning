@@ -839,9 +839,9 @@ class Trainer(
             torch_distrib.barrier()
 
         # wait for all models to restore weights
-        if self.on_tpu and XLA_AVAILABLE:
+        # if self.on_tpu and XLA_AVAILABLE:
             # wait for all processes to catch up
-            torch_xla.core.xla_model.rendezvous("pl.Trainer.run_pretrain_routine")
+            # torch_xla.core.xla_model.rendezvous("pl.Trainer.run_pretrain_routine")
 
         # register auto-resubmit when on SLURM
         self.register_slurm_signal_handlers()

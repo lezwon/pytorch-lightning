@@ -243,9 +243,9 @@ class TrainerDataLoadingMixin(ABC):
             torch_distrib.barrier()
 
         # data download/load on TPU
-        elif self.use_tpu and XLA_AVAILABLE:
+        # elif self.use_tpu and XLA_AVAILABLE:
             # all processes wait until data download has happened
-            torch_xla.core.xla_model.rendezvous('pl.TrainerDataLoadingMixin.get_dataloaders')
+            # torch_xla.core.xla_model.rendezvous('pl.TrainerDataLoadingMixin.get_dataloaders')
 
         return dataloader
 
