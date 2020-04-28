@@ -431,7 +431,7 @@ class TrainerDPMixin(ABC):
         if device == 'tpu' and XLA_AVAILABLE:
             # base case: object can be directly moved using `to`
             if callable(getattr(batch, 'to', None)):
-                return batch.to(xm.xla_device())
+                return batch.to(xm.xla_device(self.tpu_id))
 
         if device == 'gpu':
             # base case: object can be directly moved using `cuda` or `to`
