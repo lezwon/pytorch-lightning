@@ -244,10 +244,10 @@ class TrainerEvaluationLoopMixin(ABC):
             dl_outputs = []
 
             # on TPU we have to wrap it under the ParallelLoader
-            if self.use_tpu:
-                print(self.tpu_id)
-                device = xm.xla_device(self.tpu_id)
-                print(device)
+            # if self.use_tpu:
+                # print(self.tpu_id)
+                # device = xm.xla_device(self.tpu_id)
+                # print(device)
                 # dataloader = xla_pl.ParallelLoader(dataloader, [device])
                 # dataloader = dataloader.per_device_loader(device)
 
