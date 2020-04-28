@@ -556,12 +556,12 @@ class TrainerTrainLoopMixin(ABC):
                 response = self.get_model().on_batch_start(batch)
                 if response == -1:
                     return -1, grad_norm_dic, {}, {}
-        print('On Batch start')
+
 
         splits = [batch]
         if self.truncated_bptt_steps is not None:
             model_ref = self.get_model()
-            print('model ref:', model_ref)
+
             with self.profiler.profile('tbptt_split_batch'):
                 splits = model_ref.tbptt_split_batch(batch, self.truncated_bptt_steps)
 
@@ -585,7 +585,7 @@ class TrainerTrainLoopMixin(ABC):
                 def optimizer_closure():
                     # forward pass
                     with self.profiler.profile('model_forward'):
-                        print('model_forward code')
+
                         output_dict = self.training_forward(
                             split_batch, batch_idx, opt_idx, self.hiddens)
 
@@ -601,7 +601,7 @@ class TrainerTrainLoopMixin(ABC):
                     # backward pass
                     model_ref = self.get_model()
                     with self.profiler.profile('model_backward'):
-                        print('model_backward code')
+
                         model_ref.backward(self, closure_loss, optimizer, opt_idx)
 
                     # track metrics for callbacks
@@ -636,7 +636,7 @@ class TrainerTrainLoopMixin(ABC):
                     if batch_idx % self.row_log_interval == 0:
                         if self.track_grad_norm > 0:
                             model = self.get_model()
-                            print('grad norm code')
+
                             grad_norm_dic = model.grad_norm(
                                 self.track_grad_norm)
 
@@ -647,7 +647,7 @@ class TrainerTrainLoopMixin(ABC):
                     # override function to modify this behavior
                     model = self.get_model()
                     with self.profiler.profile('optimizer_step'):
-                        print('optimizer code')
+
                         model.optimizer_step(self.current_epoch, batch_idx,
                                              optimizer, opt_idx,
                                              lambda: optimizer_closure()[0])
@@ -666,7 +666,7 @@ class TrainerTrainLoopMixin(ABC):
             if self.is_function_implemented('on_batch_end'):
                 self.get_model().on_batch_end()
 
-        print('progress bar code')
+
         # update progress bar
         if self.progress_bar_refresh_rate >= 1 and batch_idx % self.progress_bar_refresh_rate == 0:
             self.main_progress_bar.update(self.progress_bar_refresh_rate)

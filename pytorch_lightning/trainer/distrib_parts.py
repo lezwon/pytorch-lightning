@@ -432,7 +432,7 @@ class TrainerDPMixin(ABC):
             # base case: object can be directly moved using `to`
             if callable(getattr(batch, 'to', None)):
                 xla_device = xm.xla_device(self.tpu_id)
-                print(xla_device)
+                print('xla_device' + xla_device)
                 return batch.to(xla_device)
 
         if device == 'gpu':
@@ -484,7 +484,7 @@ class TrainerDPMixin(ABC):
         # put model on tpu
         print(self.tpu_id)
         device = xm.xla_device(self.tpu_id)
-        print(device)
+        print('xla_device' + device)
         model.to(device)
         
 
