@@ -444,8 +444,7 @@ class TrainerDPMixin(ABC):
         if device == 'tpu' and XLA_AVAILABLE:
             # base case: object can be directly moved using `to`
             if callable(getattr(batch, 'to', None)):
-                xla_device = xm.xla_device(self.tpu_id) if self.tpu_id is not None else xm.xla_device()
-                return batch.to(xla_device)
+                return batch.to(self._device)
 
         if device == 'gpu':
             # base case: object can be directly moved using `cuda` or `to`
@@ -501,7 +500,10 @@ class TrainerDPMixin(ABC):
 
     def tpu_train(self, tpu_core_idx, model):
         # put model on tpu
-        self._device = xm.xla_device(self.tpu_id) if self.tpu_id is not None else xm.xla_device()
+        if self.tpu_id is not None:
+            self._device = xm.xla_device(self.tpu_id)
+        else:
+            self._device = xm.xla_device()
         model.to(self._device)
 
         # get the appropriate tpu ranks
