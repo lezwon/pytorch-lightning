@@ -308,10 +308,6 @@ class TrainerTrainLoopMixin(ABC):
         def _signal_kill_handler(*args):
             return TrainerTrainLoopMixin.run_training_teardown(self)
 
-        orig_signal_handlers = {}
-        for sig_name in SIGNAL_TERMINATE:
-            orig_signal_handlers[sig_name] = signal.signal(getattr(signal, sig_name),
-                                                           _signal_kill_handler)
 
         # get model
         model = self.get_model()
@@ -384,9 +380,6 @@ class TrainerTrainLoopMixin(ABC):
 
             self.run_training_teardown()
 
-            # reset signal handlers
-            for sig_name in SIGNAL_TERMINATE:
-                signal.signal(getattr(signal, sig_name), orig_signal_handlers[sig_name])
 
         except KeyboardInterrupt:
             if self.proc_rank == 0:
