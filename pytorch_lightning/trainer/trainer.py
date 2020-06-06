@@ -897,6 +897,10 @@ class Trainer(
             self.single_gpu_train(model)
 
         elif self.use_tpu:  # pragma: no-cover
+
+            if not XLA_AVAILABLE:
+                raise MisconfigurationException('No TPU devices found.')
+
             log.info(f'training on {self.tpu_cores} TPU cores')
 
             #  COLAB_GPU is an env var available by default in Colab environments.
