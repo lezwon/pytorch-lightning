@@ -163,7 +163,7 @@ class TrainerDPMixin(ABC):
 
     def tpu_train(self, tpu_core_idx, model):
         # put model on tpu
-        self._device = xm.xla_device(self.tpu_id) if self.tpu_id is not None else xm.xla_device()
+        self._device = xm.xla_device()
         model.to(self._device)
 
         # get the appropriate tpu ranks
