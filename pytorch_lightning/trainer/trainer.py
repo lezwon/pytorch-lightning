@@ -1201,6 +1201,8 @@ class Trainer(
             model_ref = self.get_model()
             model_ref.teardown('test')
 
+        return 1
+
     def check_model_configuration(self, model: LightningModule):
         r"""
         Checks that the model is configured correctly before training or testing is started.
