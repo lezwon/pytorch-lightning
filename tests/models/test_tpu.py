@@ -35,7 +35,8 @@ def test_single_tpu_core_model(tmpdir, tpu_cores, expected_device):
         val_percent_check=0.1,
         tpu_cores=tpu_cores,
     )
-    trainer.fit(model)
+    assert trainer.fit(model)
+    assert trainer.test()
     assert torch_xla._XLAC._xla_get_default_device() == expected_device
 
 
@@ -52,7 +53,8 @@ def test_multi_core_tpu_model(tmpdir, tpu_cores):
         val_percent_check=0.2,
         tpu_cores=tpu_cores,
     )
-    trainer.fit(model)
+    assert trainer.fit(model)
+    assert trainer.test()
     assert trainer.tpu_id is None
 
 
