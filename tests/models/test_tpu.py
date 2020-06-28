@@ -29,10 +29,7 @@ def test_single_tpu_core_model(tmpdir, tpu_cores, expected_device):
     model = EvalModelTemplate()
     trainer = Trainer(
         default_root_dir=tmpdir,
-        progress_bar_refresh_rate=0,
         max_epochs=1,
-        train_percent_check=0.1,
-        val_percent_check=0.1,
         tpu_cores=tpu_cores,
     )
     assert trainer.fit(model)
@@ -49,8 +46,6 @@ def test_multi_core_tpu_model(tmpdir, tpu_cores):
     trainer = Trainer(
         default_root_dir=tmpdir,
         max_epochs=1,
-        train_percent_check=0.4,
-        val_percent_check=0.2,
         tpu_cores=tpu_cores,
     )
     assert trainer.fit(model)
