@@ -457,7 +457,7 @@ class TrainerDDPMixin(ABC):
             original_model.load_state_dict(loaded_model.state_dict())
 
             # remove ddp weights
-            os.remove(path)
+            # os.remove(path)
 
         return loaded_model
 
