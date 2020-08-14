@@ -92,8 +92,8 @@ class TPUBackend(object):
         model = self.trainer.model
 
         # load weights if not interrupted
-        if self.trainer.on_colab_kaggle and not self.trainer.testing:
-            model = self.trainer.load_spawn_weights(model)
+        # if self.trainer.on_colab_kaggle and not self.trainer.testing:
+        #     model = self.trainer.load_spawn_weights(model)
 
         self.trainer.model = model
 
