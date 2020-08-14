@@ -451,8 +451,8 @@ class TrainerDDPMixin(ABC):
         if self.is_global_zero:
             # load weights saved in ddp
             path = os.path.join(self.default_root_dir, '__temp_weight_distributed_end.ckpt')
-            loaded_model = original_model.__class__.load_from_checkpoint(path)
-
+            # loaded_model = original_model.__class__.load_from_checkpoint(path)
+            #
             # copy loaded weights to old model
             # cpu_data = torch_xla.core.xla_model._maybe_convert_to_cpu(loaded_model.state_dict(), convert=True)
             # original_model.load_state_dict(cpu_data)

@@ -68,8 +68,6 @@ class TPUBackend(object):
             ckpt = torch.load(last_path, map_location=lambda storage, loc: storage)
             model.load_state_dict(ckpt)
 
-        self.trainer.model = model
-
         # when training completes, load the weights back in main process
         self.__load_weights_on_main_process()
         return results
