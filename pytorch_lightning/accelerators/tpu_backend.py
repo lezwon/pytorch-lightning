@@ -71,7 +71,7 @@ class TPUBackend(object):
         self.trainer.model = model
 
         # when training completes, load the weights back in main process
-        # self.__load_weights_on_main_process()
+        self.__load_weights_on_main_process()
         return results
 
     def train(self, model: LightningModule):
