@@ -116,7 +116,7 @@ class TPUBackend(object):
         self.__save_end_of_training_weights(model, trainer)
 
         # persist info in spawn
-        trainer.transfer_distrib_spawn_state_on_fit_end(model, mp_queue, results)
+        # trainer.transfer_distrib_spawn_state_on_fit_end(model, mp_queue, results)
         # xm.save(model.state_dict(), 'model.ckpt', master_only=True, global_master=True)
 
 
