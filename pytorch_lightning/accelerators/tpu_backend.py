@@ -113,11 +113,11 @@ class TPUBackend(object):
         results = trainer.run_pretrain_routine(model)
 
         # save weights at the end of training
-        # self.__save_end_of_training_weights(model, trainer)
+        self.__save_end_of_training_weights(model, trainer)
 
         # persist info in spawn
         # trainer.transfer_distrib_spawn_state_on_fit_end(model, mp_queue, results)
-        xm.save(model.state_dict(), 'model.ckpt', master_only=True, global_master=True)
+        # xm.save(model.state_dict(), 'model.ckpt', master_only=True, global_master=True)
 
 
     def __save_end_of_training_weights(self, model: LightningModule, trainer):
