@@ -454,8 +454,8 @@ class TrainerDDPMixin(ABC):
             loaded_model = original_model.__class__.load_from_checkpoint(path)
 
             # copy loaded weights to old model
-            cpu_data = torch_xla.core.xla_model._maybe_convert_to_cpu(loaded_model.state_dict(), convert=True)
-            original_model.load_state_dict(cpu_data)
+            # cpu_data = torch_xla.core.xla_model._maybe_convert_to_cpu(loaded_model.state_dict(), convert=True)
+            # original_model.load_state_dict(cpu_data)
 
             # remove ddp weights
             # os.remove(path)
