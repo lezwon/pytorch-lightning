@@ -89,13 +89,11 @@ class TPUBackend(object):
             )
 
     def __load_weights_on_main_process(self):
-        model = self.trainer.model
 
         # load weights if not interrupted
-        # if self.trainer.on_colab_kaggle and not self.trainer.testing:
-        #     model = self.trainer.load_spawn_weights(model)
+        if self.trainer.on_colab_kaggle and not self.trainer.testing:
+            self.trainer.load_spawn_weights(self.trainer.model)
 
-        self.trainer.model = model
 
     def tpu_train_in_process(self, tpu_core_idx: int, model: LightningModule, trainer=None, mp_queue=None):
         """
