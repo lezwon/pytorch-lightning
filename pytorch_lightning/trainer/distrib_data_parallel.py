@@ -424,7 +424,7 @@ class TrainerDDPMixin(ABC):
             last_path = None
             if not self.testing and best_model_path is not None and len(best_model_path) > 0:
                 last_path = re.sub('.ckpt', '.tmp_end.ckpt', best_model_path)
-                atomic_save(model.state_dict(), last_path)
+                # atomic_save(model.state_dict(), last_path)
             mp_queue.put(last_path)
 
     def save_spawn_weights(self, model):
