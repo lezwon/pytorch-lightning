@@ -263,4 +263,4 @@ def test_model_without_checkpoint_callback(tmpdir):
     model.train_dataloader = _serial_train_loader
     model.val_dataloader = _serial_train_loader
 
-    tpipes.run_model_test(trainer_options, model, on_gpu=False, with_hpc=False)
+    tpipes.run_model_test(trainer_options, model, on_gpu=False, with_hpc=False, reload_model=False)

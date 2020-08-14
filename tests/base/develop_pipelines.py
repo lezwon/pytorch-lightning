@@ -34,7 +34,7 @@ def run_model_test_without_loggers(trainer_options, model, min_acc: float = 0.50
         trainer.optimizers, trainer.lr_schedulers = pretrained_model.configure_optimizers()
 
 
-def run_model_test(trainer_options, model, on_gpu: bool = True, version=None, with_hpc: bool = True):
+def run_model_test(trainer_options, model, on_gpu: bool = True, version=None, with_hpc: bool = True, reload_model=True):
 
     reset_seed()
     save_dir = trainer_options['default_root_dir']
@@ -53,7 +53,10 @@ def run_model_test(trainer_options, model, on_gpu: bool = True, version=None, wi
     assert result == 1, 'trainer failed'
 
     # test model loading
-    pretrained_model = load_model_from_checkpoint(logger, trainer.checkpoint_callback.best_model_path)
+    if reload_model:
+        pretrained_model = load_model_from_checkpoint(logger, trainer.checkpoint_callback.best_model_path)
+    else:
+        pretrained_model = model
 
     # test new model accuracy
     test_loaders = model.test_dataloader()
